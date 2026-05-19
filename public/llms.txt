@@ -44,7 +44,10 @@ Information about WCAG compliance and accessibility features.
 
 ## How to Contact Us
 
-- (No contact details configured yet.)
+- Email: A24b1024@gmail.com
+- Phone: +972507774342
+- Phone (tel): tel:+972507774342
+- Address: נחום חפצדי 17, ירושלים, גבעת שאול, 9548407, ישראל
 
 ### Contact form
 - URL: https://example.com/contact
