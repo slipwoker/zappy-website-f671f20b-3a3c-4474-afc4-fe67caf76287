@@ -1,0 +1,92 @@
+# משרד עורכי דין אברהם בלום — Generative Engine Optimization Map
+
+> Law office of attorney Abraham Bloom, specializing in real estate law, urban renewal, wills and inheritance, and enduring power of attorney. The firm handles a broad range of legal services with a focus on property and personal planning law. The brand should convey professionalism, trustworthiness, and legal expertise, drawing inspiration from leading Israeli and international law firm websites.
+
+---
+
+## Pages
+
+### בית
+https://example.com
+משרד עורכי דין אברהם בלום מתמחה במקרקעין, התחדשות עירונית, צוואות וייפוי כוח מתמשך. ליווי משפטי מקצועי, אישי ואמין — כי הנכס והעתיד שלך שווים את הטוב ביותר.
+
+### תחומי עיסוק
+https://example.com/practice-areas
+מנדל״ן ועסקאות מקרקעין ועד התחדשות עירונית, ירושות וייפוי כוח מתמשך — גלה את מגוון תחומי העיסוק המשפטיים שבהם אנו מובילים עבורך בכל שלב בחיים.
+
+### אודות
+https://example.com/about
+עורך הדין אברהם בלום מביא ניסיון עשיר, גישה אישית ומחויבות עמוקה לכל לקוח. גלה מי עומד מאחורי המשרד ולמה אלפי לקוחות בוחרים בנו שוב ושוב לייצוג משפטי מוביל.
+
+### תובנות
+https://example.com/insights
+מאמרים, עדכוני חקיקה וטיפים מעשיים בתחומי מקרקעין, צוואות, התחדשות עירונית וייפוי כוח מתמשך — כי ידע משפטי נכון הוא ההגנה הטובה ביותר שתוכל לתת לעצמך.
+
+### צור קשר
+https://example.com/contact
+צור קשר עוד היום עם משרד עורכי דין אברהם בלום לייעוץ ראשוני בתחומי מקרקעין, ירושות וייפוי כוח מתמשך. אנחנו כאן כדי להקשיב, לייעץ ולפעול — מהר, מקצועי ובשקיפות מלאה.
+
+## Legal & Policy
+
+### Privacy Policy
+https://example.com/privacy
+Information about how user data is collected, stored, and protected.
+
+### Terms & Conditions
+https://example.com/terms
+Legal terms describing service usage, rights, and policies.
+
+### Accessibility Statement
+https://example.com/accessibility
+Information about WCAG compliance and accessibility features.
+
+---
+
+## How to Contact Us
+
+- (No contact details configured yet.)
+
+### Contact form
+- URL: https://example.com/contact
+- Endpoint: https://example.com/api/email/contact-form
+- Method: POST
+- Content-Type: application/json
+- Fields:
+  - `name` (text, required)
+  - `email` (email, required)
+  - `phone` (tel)
+  - `message` (textarea, required)
+  - `privacy_consent` (checkbox, required)
+
+---
+
+# Business Context (for LLM understanding)
+
+## About משרד עורכי דין אברהם בלום
+Law office of attorney Abraham Bloom, specializing in real estate law, urban renewal, wills and inheritance, and enduring power of attorney. The firm handles a broad range of legal services with a focus on property and personal planning law. The brand should convey professionalism, trustworthiness, and legal expertise, drawing inspiration from leading Israeli and international law firm websites.
+
+## Services/Products
+- דיני מקרקעין
+- התחדשות עירונית
+- נדל"ן
+- צוואות וירושות
+- ייפוי כוח מתמשך
+
+## Target Audience
+- לקוחות בעלי הון גבוה
+- עסקים תאגידיים
+- מייסדי סטארטאפ
+- משקיעי נדל"ן
+- לקוחות משפט משפחה
+- לקוחות פרטים בתחום הנדל״ן וירושות וייפוי כוח מתמשך
+
+## Industry
+Legal Services
+
+---
+
+# Machine-readable feeds
+
+- Sitemap (XML): https://example.com/sitemap.xml
+- Robots: https://example.com/robots.txt
+- Flattened page text (for LLMs): https://example.com/llms-full.txt
