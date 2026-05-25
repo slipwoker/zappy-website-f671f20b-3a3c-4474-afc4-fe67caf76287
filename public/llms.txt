@@ -7,37 +7,37 @@
 ## Pages
 
 ### בית
-https://example.com
+https://mishradorche-dinabrahambloom-w.zappy5.app
 משרד עורכי דין אברהם בלום מתמחה במקרקעין, התחדשות עירונית, צוואות וייפוי כוח מתמשך. ליווי משפטי מקצועי, אישי ואמין — כי הנכס והעתיד שלך שווים את הטוב ביותר.
 
 ### תחומי עיסוק
-https://example.com/practice-areas
+https://mishradorche-dinabrahambloom-w.zappy5.app/practice-areas
 מנדל״ן ועסקאות מקרקעין ועד התחדשות עירונית, ירושות וייפוי כוח מתמשך — גלה את מגוון תחומי העיסוק המשפטיים שבהם אנו מובילים עבורך בכל שלב בחיים.
 
 ### אודות
-https://example.com/about
+https://mishradorche-dinabrahambloom-w.zappy5.app/about
 עורך הדין אברהם בלום מביא ניסיון עשיר, גישה אישית ומחויבות עמוקה לכל לקוח. גלה מי עומד מאחורי המשרד ולמה אלפי לקוחות בוחרים בנו שוב ושוב לייצוג משפטי מוביל.
 
 ### תובנות
-https://example.com/insights
+https://mishradorche-dinabrahambloom-w.zappy5.app/insights
 מאמרים, עדכוני חקיקה וטיפים מעשיים בתחומי מקרקעין, צוואות, התחדשות עירונית וייפוי כוח מתמשך — כי ידע משפטי נכון הוא ההגנה הטובה ביותר שתוכל לתת לעצמך.
 
 ### צור קשר
-https://example.com/contact
+https://mishradorche-dinabrahambloom-w.zappy5.app/contact
 צור קשר עוד היום עם משרד עורכי דין אברהם בלום לייעוץ ראשוני בתחומי מקרקעין, ירושות וייפוי כוח מתמשך. אנחנו כאן כדי להקשיב, לייעץ ולפעול — מהר, מקצועי ובשקיפות מלאה.
 
 ## Legal & Policy
 
 ### Privacy Policy
-https://example.com/privacy
+https://mishradorche-dinabrahambloom-w.zappy5.app/privacy
 Information about how user data is collected, stored, and protected.
 
 ### Terms & Conditions
-https://example.com/terms
+https://mishradorche-dinabrahambloom-w.zappy5.app/terms
 Legal terms describing service usage, rights, and policies.
 
 ### Accessibility Statement
-https://example.com/accessibility
+https://mishradorche-dinabrahambloom-w.zappy5.app/accessibility
 Information about WCAG compliance and accessibility features.
 
 ---
@@ -50,8 +50,8 @@ Information about WCAG compliance and accessibility features.
 - Address: נחום חפצדי 17, ירושלים, גבעת שאול, 9548407, ישראל
 
 ### Contact form
-- URL: https://example.com/contact
-- Endpoint: https://example.com/api/email/contact-form
+- URL: https://mishradorche-dinabrahambloom-w.zappy5.app/contact
+- Endpoint: https://mishradorche-dinabrahambloom-w.zappy5.app/api/email/contact-form
 - Method: POST
 - Content-Type: application/json
 - Fields:
@@ -90,6 +90,6 @@ Legal Services
 
 # Machine-readable feeds
 
-- Sitemap (XML): https://example.com/sitemap.xml
-- Robots: https://example.com/robots.txt
-- Flattened page text (for LLMs): https://example.com/llms-full.txt
+- Sitemap (XML): https://mishradorche-dinabrahambloom-w.zappy5.app/sitemap.xml
+- Robots: https://mishradorche-dinabrahambloom-w.zappy5.app/robots.txt
+- Flattened page text (for LLMs): https://mishradorche-dinabrahambloom-w.zappy5.app/llms-full.txt
