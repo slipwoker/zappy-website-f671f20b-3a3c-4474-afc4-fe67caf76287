@@ -161,26 +161,31 @@
       // Track button clicks (counted as actions)
       if (target.tagName === 'BUTTON' || target.closest('button')) {
         var button = target.tagName === 'BUTTON' ? target : target.closest('button');
-        trackEvent('click', {
+        var clickMeta = {
           element: 'button',
           text: button.textContent.trim().substring(0, 100),
           id: button.id || null,
           class: button.className || null
-        });
+        };
+        
+        trackEvent('click', clickMeta);
       }
       
       // Track link clicks (navigation - not counted as actions)
       else if (target.tagName === 'A' || target.closest('a')) {
         var link = target.tagName === 'A' ? target : target.closest('a');
-        trackEvent('navigation', {
+        var navMeta = {
           element: 'link',
           text: link.textContent.trim().substring(0, 100),
           href: link.href,
           external: link.hostname !== window.location.hostname
-        });
+        };
+        
+        trackEvent('navigation', navMeta);
       }
     }, true);
   }
+  
   
   // Track form submissions
   if (config.trackFormSubmissions) {
@@ -223,6 +228,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="מדיניות פרטיות">
     <meta name="twitter:description" content="מדיניות הפרטיות שלנו - כיצד אנו אוספים, משתמשים ומגנים על המידע שלכם">
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"LocalBusiness","@id":"https://blumofficelaw.co.il#organization","name":"משרד עורכי דין אברהם בלום","url":"https://blumofficelaw.co.il","description":"Law office of attorney Abraham Bloom, specializing in real estate law, urban renewal, wills and inheritance, and enduring power of attorney. The firm handles a broad range of legal services with a focus on property and personal planning law. The brand should convey professionalism, trustworthiness, and legal expertise, drawing inspiration from leading Israeli and international law firm websites.","address":{"@type":"PostalAddress","streetAddress":"נחום חפצדי 17, ירושלים, גבעת שאול, 9548407, ישראל"},"contactPoint":[{"@type":"ContactPoint","contactType":"customer service","email":"blumofficelaw@gmail.com","telephone":"+972507774342"}]},{"@type":"WebSite","@id":"https://blumofficelaw.co.il#website","url":"https://blumofficelaw.co.il","name":"משרד עורכי דין אברהם בלום","publisher":{"@id":"https://blumofficelaw.co.il#organization"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://blumofficelaw.co.il"},{"@type":"ListItem","position":2,"name":"Privacy","item":"https://blumofficelaw.co.il/privacy"}]}]}</script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     
@@ -241,6 +247,7 @@
     <!-- Mickidum Accessibility Toolbar -->
     <script src="https://cdn.jsdelivr.net/gh/mickidum/acc_toolbar/acctoolbar/acctoolbar.min.js"></script>
     <link rel="stylesheet" href="/styles.css">
+    <script>window.ZAPPY_WEBSITE_ID = "f671f20b-3a3c-4474-afc4-fe67caf76287"; window.ZAPPY_API_BASE = "https://api.zappy5.com";</script>
 
     <style id="zappy-dropdown-submenu-styles">
       /* ========== DESKTOP DROPDOWN SUBMENU STYLES ========== */
@@ -484,15 +491,15 @@
 
       <!-- Column 4: Business Hours -->
       <div class="footer-col footer-hours-col">
-        <h3 class="footer-heading">שעות פעילות</h3>
+        <h3 class="footer-heading" >שעות פעילות</h3>
         <ul class="footer-hours" aria-label="שעות פעילות המשרד">
-          <li><a href="/"><span class="hours-day">יום שני</span>&nbsp;<span class="hours-time">09:00 - 17:00</span></a></li>
-          <li><a href="/"><span class="hours-day">יום שלישי</span>&nbsp;<span class="hours-time">09:00 - 17:00</span></a></li>
-          <li><a href="/"><span class="hours-day">יום רביעי</span>&nbsp;<span class="hours-time">09:00 - 17:00</span></a></li>
-          <li><a href="/"><span class="hours-day">יום חמישי</span>&nbsp;<span class="hours-time">09:00 - 17:00</span></a></li>
-          <li><a href="/"><span class="hours-day">יום שישי</span>&nbsp;<span class="hours-time hours-closed">סגור</span></a></li>
-          <li><a href="/"><span class="hours-day">יום שבת</span>&nbsp;<span class="hours-time hours-closed">סגור</span></a></li>
-          <li><a href="/"><span class="hours-day">יום ראשון</span>&nbsp;<span class="hours-time hours-closed">09:00 - 17:00</span></a></li>
+          <li><a href="/" ><span class="hours-day">יום ראשון&nbsp;</span><span class="hours-time">09:00 - 17:00</span></a></li>
+          <li><a href="/" ><span class="hours-day">יום שני</span>&nbsp;<span class="hours-time">09:00 - 17:00</span></a></li>
+          <li><a href="/" ><span class="hours-day">יום שלישי&nbsp;</span><span class="hours-time">09:00 - 17:00</span></a></li>
+          <li><a href="/" ><span class="hours-day">יום רביעי&nbsp;</span><span class="hours-time">09:00 - 17:00</span></a></li>
+          <li><a href="/" ><span class="hours-day">יום חמישי <b>09:00 - 17:00&nbsp;</b></span></a></li>
+          <li><a href="/" ><span class="hours-day">יום שישי&nbsp;</span><span class="hours-time hours-closed">סגור</span></a></li>
+          <li><a href="/" ><span class="hours-day">יום שבת&nbsp;</span><span class="hours-time hours-closed">סגור</span></a></li>
         </ul>
         <div class="footer-badge" aria-label="זמינות לייעוץ">
           <i class="fas fa-shield-alt" data-element-type="icon" data-element-id="icon-1779710818424-bwoafhed4" data-icon-type="fontawesome"></i>
@@ -512,11 +519,11 @@
       <p class="footer-copyright">© 2026 משרד עורכי דין אברהם בלום. כל הזכויות שמורות.</p>
       <div class="footer-legal-links" aria-label="קישורים משפטיים">
         <a href="/privacy">מדיניות פרטיות</a>
-        <span class="footer-legal-sep" aria-hidden="true">|</span>
+        <span class="footer-legal-sep" aria-hidden="true" style="color: rgb(247, 243, 234) !important;">|</span>
         <a href="/terms">תנאי שימוש</a>
-        <span class="footer-legal-sep" aria-hidden="true">|</span>
+        <span class="footer-legal-sep" aria-hidden="true" style="color: rgb(247, 243, 234) !important;">|</span>
         <a href="/accessibility">נגישות</a>
-        <span class="footer-legal-sep" aria-hidden="true">|</span>
+        <span class="footer-legal-sep" aria-hidden="true" style="color: rgb(247, 243, 234) !important;">|</span>
         <a href="https://zappy5.com" target="_blank" class="zappy-attribution">נוצר באמצעות Zappy</a>
       </div>
     </div>
