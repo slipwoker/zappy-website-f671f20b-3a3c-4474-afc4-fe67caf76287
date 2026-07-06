@@ -161,26 +161,31 @@
       // Track button clicks (counted as actions)
       if (target.tagName === 'BUTTON' || target.closest('button')) {
         var button = target.tagName === 'BUTTON' ? target : target.closest('button');
-        trackEvent('click', {
+        var clickMeta = {
           element: 'button',
           text: button.textContent.trim().substring(0, 100),
           id: button.id || null,
           class: button.className || null
-        });
+        };
+        
+        trackEvent('click', clickMeta);
       }
       
       // Track link clicks (navigation - not counted as actions)
       else if (target.tagName === 'A' || target.closest('a')) {
         var link = target.tagName === 'A' ? target : target.closest('a');
-        trackEvent('navigation', {
+        var navMeta = {
           element: 'link',
           text: link.textContent.trim().substring(0, 100),
           href: link.href,
           external: link.hostname !== window.location.hostname
-        });
+        };
+        
+        trackEvent('navigation', navMeta);
       }
     }, true);
   }
+  
   
   // Track form submissions
   if (config.trackFormSubmissions) {
@@ -223,6 +228,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="צעד אחד קטן לשקט נפשי גדול — משרד עורכי דין אברהם בלום">
     <meta name="twitter:description" content="צור קשר עוד היום עם משרד עורכי דין אברהם בלום לייעוץ ראשוני בתחומי מקרקעין, ירושות וייפוי כוח מתמשך. אנחנו כאן כדי להקשיב, לייעץ ולפעול — מהר, מקצועי ובשקיפות מלאה.">
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"LocalBusiness","@id":"https://blumofficelaw.co.il#organization","name":"משרד עורכי דין אברהם בלום","url":"https://blumofficelaw.co.il","description":"Law office of attorney Abraham Bloom, specializing in real estate law, urban renewal, wills and inheritance, and enduring power of attorney. The firm handles a broad range of legal services with a focus on property and personal planning law. The brand should convey professionalism, trustworthiness, and legal expertise, drawing inspiration from leading Israeli and international law firm websites.","address":{"@type":"PostalAddress","streetAddress":"נחום חפצדי 17, ירושלים, גבעת שאול, 9548407, ישראל"},"contactPoint":[{"@type":"ContactPoint","contactType":"customer service","email":"blumofficelaw@gmail.com","telephone":"+972507774342"}]},{"@type":"WebSite","@id":"https://blumofficelaw.co.il#website","url":"https://blumofficelaw.co.il","name":"משרד עורכי דין אברהם בלום","publisher":{"@id":"https://blumofficelaw.co.il#organization"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://blumofficelaw.co.il"},{"@type":"ListItem","position":2,"name":"Contact","item":"https://blumofficelaw.co.il/contact"}]},{"@type":"ContactPage","@id":"https://blumofficelaw.co.il/contact#contactpage","url":"https://blumofficelaw.co.il/contact","name":"צעד אחד קטן לשקט נפשי גדול — משרד עורכי דין אברהם בלום","mainEntity":{"@id":"https://blumofficelaw.co.il#organization"},"potentialAction":{"@type":"CommunicateAction","target":{"@type":"EntryPoint","urlTemplate":"https://blumofficelaw.co.il/api/email/contact-form","actionPlatform":["http/method=POST"],"contentType":"application/json"},"instrument":[{"@type":"PropertyValue","name":"name","propertyID":"text","valueRequired":true,"description":"ישראל ישראלי"},{"@type":"PropertyValue","name":"email","propertyID":"email","valueRequired":true,"description":"name@example.com"},{"@type":"PropertyValue","name":"phone","propertyID":"tel","valueRequired":false,"description":"050-0000000"},{"@type":"PropertyValue","name":"message","propertyID":"textarea","valueRequired":true,"description":"תארו בקצרה את נושא הפנייה..."},{"@type":"PropertyValue","name":"privacy_consent","propertyID":"checkbox","valueRequired":true}]}}]}</script>
     <meta property="og:type" content="website">
   <meta property="og:locale" content="he_IL">
   
@@ -253,6 +259,7 @@
     <!-- Mickidum Accessibility Toolbar -->
     <script src="https://cdn.jsdelivr.net/gh/mickidum/acc_toolbar/acctoolbar/acctoolbar.min.js"></script>
     <link rel="stylesheet" href="/styles.css">
+    <script>window.ZAPPY_WEBSITE_ID = "f671f20b-3a3c-4474-afc4-fe67caf76287"; window.ZAPPY_API_BASE = "https://api.zappy5.com";</script>
 
     <style id="zappy-dropdown-submenu-styles">
       /* ========== DESKTOP DROPDOWN SUBMENU STYLES ========== */
@@ -812,22 +819,22 @@
 </script>
   
   <main id="main">
-    <section class="contact-contact-intro-section" data-layout-spec="צור קשר-contact-intro" dir="rtl">
+    <section class="contact-contact-intro-section" data-layout-spec="צור קשר-contact-intro" dir="rtl" id="contact-contact-intro-section">
   <div class="contact-intro-container">
 
     <!-- Section Header -->
     <div class="contact-intro-header">
-      <span class="contact-intro-eyebrow">צרו קשר</span>
-      <div class="contact-intro-gold-rule"></div>
+      <p class="zappy-editable"><span class="contact-intro-eyebrow" style="color: rgb(30, 30, 28) !important;">צרו קשר</span>
+      </p><div class="contact-intro-gold-rule"></div>
       <h1 class="contact-intro-title">נשמח לעמוד לרשותכם</h1>
       <p class="contact-intro-lead">משרד עורכי דין אברהם בלום מעניק שירות אישי ומקצועי ללקוחות פרטיים ועסקיים. בין אם מדובר בעסקת מקרקעין, תכנון עיזבון, ייפוי כוח מתמשך או כל שאלה משפטית אחרת — אנו כאן להקשיב ולסייע.</p>
     </div>
 
     <!-- Contact Method Cards -->
-    <div class="contact-methods-grid">
+    <div class="contact-methods-grid zappy-preserve-css-grid" id="zappy-auto-grid-1783327205077-k1wh10" data-zappy-auto-grid="true" data-original-item-width="379" data-original-gap="32px" style="--zappy-grid-cols: repeat(auto-fit, minmax(min(100%, 379px), 1fr)); grid-template-columns: repeat(auto-fit, minmax(min(100%, 379px), 1fr)); display: grid; align-items: stretch !important;" data-zappy-explicit-columns="true">
 
       <!-- Phone -->
-      <article class="contact-method-card">
+      <article class="contact-method-card" data-grid-item-index="0">
         <div class="contact-method-icon-wrap">
           <svg data-element-type="icon" data-icon-type="svg" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"></path>
@@ -835,13 +842,13 @@
         </div>
         <div class="contact-method-content">
           <h3 class="contact-method-title">טלפון</h3>
-          <p class="contact-method-desc">זמינים בימים שני עד חמישי, 09:00–17:00</p>
+          <p class="contact-method-desc" style="">זמינים בימים ראשון עד חמישי, 09:00–17:00</p>
           
         </div>
       </article>
 
       <!-- Email -->
-      <article class="contact-method-card">
+      <article class="contact-method-card" data-grid-item-index="1">
         <div class="contact-method-icon-wrap">
           <svg data-element-type="icon" data-icon-type="svg" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
@@ -856,7 +863,7 @@
       </article>
 
       <!-- Office Visit -->
-      <article class="contact-method-card">
+      <article class="contact-method-card" data-grid-item-index="2">
         <div class="contact-method-icon-wrap">
           <svg data-element-type="icon" data-icon-type="svg" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"></path>
@@ -973,13 +980,13 @@
   </div>
 </section>
 
-<section class="contact-location-section" data-layout-spec="צור קשר-location" dir="rtl">
+<section class="contact-location-section" data-layout-spec="צור קשר-location" dir="rtl" id="contact-location-section">
   <div class="contact-location-container">
 
     <!-- Info Column (START = RIGHT in RTL) -->
     <div class="contact-location-info">
-      <span class="contact-location-eyebrow">המשרד שלנו</span>
-      <h2 class="contact-location-heading">מיקום המשרד<br>ושעות פעילות</h2>
+      <p class="zappy-editable"><span class="contact-location-eyebrow">המשרד שלנו</span>
+      </p><h2 class="contact-location-heading">מיקום המשרד<br>ושעות פעילות</h2>
       <div class="contact-location-divider-gold" aria-hidden="true"></div>
 
       <p class="contact-location-intro">
@@ -987,7 +994,7 @@
       </p>
 
       <ul class="contact-location-details" role="list">
-        <li class="contact-location-item">
+        <li class="contact-location-item zappy-grid-item-nested-grid" data-grid-item-index="0">
           <span class="contact-location-icon" aria-hidden="true">
             <svg data-element-type="icon" data-icon-type="svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 2C8.134 2 5 5.134 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.866-3.134-7-7-7z"></path>
@@ -998,7 +1005,7 @@
             <strong>כתובת</strong>
             
           </div>נחום חפצדי 17, ירושלים, גבעת שאול, 9548407, ישראל</li>
-        <li class="contact-location-item">
+        <li class="contact-location-item zappy-grid-item-nested-grid" data-grid-item-index="1">
           <span class="contact-location-icon" aria-hidden="true">
             <svg data-element-type="icon" data-icon-type="svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
               <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.22 1.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.56-.56a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"></path>
@@ -1009,7 +1016,7 @@
             
           </div>
         </li>
-        <li class="contact-location-item">
+        <li class="contact-location-item zappy-grid-item-nested-grid" data-grid-item-index="2">
           <span class="contact-location-icon" aria-hidden="true">
             <svg data-element-type="icon" data-icon-type="svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
               <rect x="2" y="4" width="20" height="16" rx="2"></rect>
@@ -1021,16 +1028,16 @@
             
           </div>
         </li>
-        <li class="contact-location-item">
+        <li class="contact-location-item zappy-grid-item-nested-grid" data-grid-item-index="3">
           <span class="contact-location-icon" aria-hidden="true">
             <svg data-element-type="icon" data-icon-type="svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
               <circle cx="12" cy="12" r="10"></circle>
               <polyline points="12,6 12,12 16,14"></polyline>
             </svg>
           </span>
-          <div class="contact-location-item-content">
+          <div class="contact-location-item-content" style="">
             <strong>שעות פעילות</strong>
-            <span>שני–חמישי: 09:00–17:00 | ראשון: 09:00–17:00</span>
+            <span>ראשון–חמישי: 09:00–17:00 | ראשון: 09:00–17:00</span>
           </div>
         </li>
       </ul>
@@ -1045,7 +1052,7 @@
     <!-- Image Column (END = LEFT in RTL) -->
     <div class="contact-location-image-col">
       <div class="contact-location-image-frame">
-        <img loading="eager" fetchpriority="high" data-placeholder="contact-location-image-1" data-context="Interior of a prestigious Israeli law office in Tel Aviv — warm dark wood paneling, a large mahogany desk, leather chairs, bookshelves lined with legal volumes, soft ambient lighting from a floor lamp, framed certificates on the wall, and a city view through large floor-to-ceiling windows. The atmosphere is calm, authoritative, and professional, conveying trust and legal expertise." width="600" height="720" src="/assets/site-contact-location-image-1.webp" alt="משרד עורכי דין אברהם בלום – פנים המשרד בתל אביב" class="contact-location-img">
+        <img loading="eager" fetchpriority="high" data-placeholder="contact-location-image-1" data-context="Interior of a prestigious Israeli law office in Tel Aviv — warm dark wood paneling, a large mahogany desk, leather chairs, bookshelves lined with legal volumes, soft ambient lighting from a floor lamp, framed certificates on the wall, and a city view through large floor-to-ceiling windows. The atmosphere is calm, authoritative, and professional, conveying trust and legal expertise." width="600" height="720" src="/assets/site-contact-location-image-1.webp" alt="משרד עורכי דין אברהם בלום – פנים המשרד בתל אביב" class="contact-location-img" data-element-type="image" data-element-id="img-1783327205032-x3zjaf95l" style="">
         <div class="contact-location-image-overlay" aria-hidden="true"></div>
         <div class="contact-location-badge" aria-hidden="true">
           <span class="contact-location-badge-number">25+</span>
@@ -1075,7 +1082,7 @@
       <!-- Column 1: Company Info -->
       <div class="footer-col footer-brand">
         <a href="/" class="footer-logo-link" aria-label="עמוד הבית של משרד עורכי דין אברהם בלום">
-          <img src="/assets/legal-services-logo.webp" alt="משרד עורכי דין אברהם בלום" class="logo" data-element-type="image" data-element-id="img-1779710818426-636k23utm" data-zappy-footer-image="true" >
+          <img src="/assets/legal-services-logo.webp" alt="משרד עורכי דין אברהם בלום" class="logo" data-element-type="image" data-element-id="img-1779710818426-636k23utm" data-zappy-footer-image="true" style="">
         </a>
         <p class="footer-tagline">ייעוץ משפטי מקצועי, אמין ומנוסה — לאנשים פרטיים, יזמים ותאגידים מובילים.</p>
         <div class="footer-social" aria-label="רשתות חברתיות">
@@ -1098,25 +1105,25 @@
       <!-- Column 3: Contact Info -->
       <div class="footer-col footer-contact-col">
         <h3 class="footer-heading">יצירת קשר</h3>
-        <ul class="footer-contact" aria-label="פרטי יצירת קשר" ><li>
+        <ul class="footer-contact" aria-label="פרטי יצירת קשר" style=""><li>
             <span class="contact-icon"><br></span></li><li>
             <span class="contact-icon"><i class="fas fa-phone" data-element-type="icon" data-element-id="icon-1779710818424-h7qy2up31" data-icon-type="fontawesome" style="cursor: pointer;"></i></span>
             <span class="contact-text"><a href="tel:+972507774342">+972507774342</a></span>
-          </li><li><a href="/" style="display:flex;align-items:flex-start;gap:inherit"><span class="contact-icon"><i class="fas fa-map-marker-alt" style="cursor: pointer;"></i></span>
+          </li><li><a href="/"><span class="contact-icon"><i class="fas fa-map-marker-alt" style="cursor: pointer;"></i></span>
             <span class="contact-text">נחום חפצדי 17, ירושלים,גבעת שאול, 9548407, ישראל</span></a></li></ul>
       </div>
 
       <!-- Column 4: Business Hours -->
       <div class="footer-col footer-hours-col">
-        <h3 class="footer-heading">שעות פעילות</h3>
+        <h3 class="footer-heading" style="">שעות פעילות</h3>
         <ul class="footer-hours" aria-label="שעות פעילות המשרד">
-          <li><a href="/"><span class="hours-day">יום שני</span>&nbsp;<span class="hours-time">09:00 - 17:00</span></a></li>
-          <li><a href="/"><span class="hours-day">יום שלישי</span>&nbsp;<span class="hours-time">09:00 - 17:00</span></a></li>
-          <li><a href="/"><span class="hours-day">יום רביעי</span>&nbsp;<span class="hours-time">09:00 - 17:00</span></a></li>
-          <li><a href="/"><span class="hours-day">יום חמישי</span>&nbsp;<span class="hours-time">09:00 - 17:00</span></a></li>
-          <li><a href="/"><span class="hours-day">יום שישי</span>&nbsp;<span class="hours-time hours-closed">סגור</span></a></li>
-          <li><a href="/"><span class="hours-day">יום שבת</span>&nbsp;<span class="hours-time hours-closed">סגור</span></a></li>
-          <li><a href="/"><span class="hours-day">יום ראשון</span>&nbsp;<span class="hours-time hours-closed">09:00 - 17:00</span></a></li>
+          <li><a href="/" style=""><span class="hours-day">יום ראשון&nbsp;</span><span class="hours-time">09:00 - 17:00</span></a></li>
+          <li><a href="/" style=""><span class="hours-day">יום שני</span>&nbsp;<span class="hours-time">09:00 - 17:00</span></a></li>
+          <li><a href="/" style=""><span class="hours-day">יום שלישי&nbsp;</span><span class="hours-time">09:00 - 17:00</span></a></li>
+          <li><a href="/" style=""><span class="hours-day">יום רביעי&nbsp;</span><span class="hours-time">09:00 - 17:00</span></a></li>
+          <li><a href="/" style=""><span class="hours-day">יום חמישי <b>09:00 - 17:00&nbsp;</b></span></a></li>
+          <li><a href="/" style=""><span class="hours-day">יום שישי&nbsp;</span><span class="hours-time hours-closed">סגור</span></a></li>
+          <li><a href="/" style=""><span class="hours-day">יום שבת&nbsp;</span><span class="hours-time hours-closed">סגור</span></a></li>
         </ul>
         <div class="footer-badge" aria-label="זמינות לייעוץ">
           <i class="fas fa-shield-alt" data-element-type="icon" data-element-id="icon-1779710818424-bwoafhed4" data-icon-type="fontawesome"></i>
@@ -1136,18 +1143,18 @@
       <p class="footer-copyright">© 2026 משרד עורכי דין אברהם בלום. כל הזכויות שמורות.</p>
       <div class="footer-legal-links" aria-label="קישורים משפטיים">
         <a href="/privacy">מדיניות פרטיות</a>
-        <span class="footer-legal-sep" aria-hidden="true">|</span>
+        <span class="footer-legal-sep" aria-hidden="true" style="color: rgb(247, 243, 234) !important;">|</span>
         <a href="/terms">תנאי שימוש</a>
-        <span class="footer-legal-sep" aria-hidden="true">|</span>
+        <span class="footer-legal-sep" aria-hidden="true" style="color: rgb(247, 243, 234) !important;">|</span>
         <a href="/accessibility">נגישות</a>
-        <span class="footer-legal-sep" aria-hidden="true">|</span>
+        <span class="footer-legal-sep" aria-hidden="true" style="color: rgb(247, 243, 234) !important;">|</span>
         <a href="https://zappy5.com" target="_blank" class="zappy-attribution">נוצר באמצעות Zappy</a>
       </div>
     </div>
   </div>
 </footer>
   
-  <a href="https://wa.me/[whatsapp_handle]" class="whatsapp-float" aria-label="WhatsApp" style="display:none">
+  <a href="https://wa.me/[whatsapp_handle]" class="whatsapp-float" aria-label="WhatsApp" style="display:none;">
     <i class="fab fa-whatsapp"></i>
   </a>
   
