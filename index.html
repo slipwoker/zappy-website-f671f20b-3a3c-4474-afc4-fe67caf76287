@@ -161,26 +161,31 @@
       // Track button clicks (counted as actions)
       if (target.tagName === 'BUTTON' || target.closest('button')) {
         var button = target.tagName === 'BUTTON' ? target : target.closest('button');
-        trackEvent('click', {
+        var clickMeta = {
           element: 'button',
           text: button.textContent.trim().substring(0, 100),
           id: button.id || null,
           class: button.className || null
-        });
+        };
+        
+        trackEvent('click', clickMeta);
       }
       
       // Track link clicks (navigation - not counted as actions)
       else if (target.tagName === 'A' || target.closest('a')) {
         var link = target.tagName === 'A' ? target : target.closest('a');
-        trackEvent('navigation', {
+        var navMeta = {
           element: 'link',
           text: link.textContent.trim().substring(0, 100),
           href: link.href,
           external: link.hostname !== window.location.hostname
-        });
+        };
+        
+        trackEvent('navigation', navMeta);
       }
     }, true);
   }
+  
   
   // Track form submissions
   if (config.trackFormSubmissions) {
@@ -223,6 +228,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="הגנה משפטית חכמה על הנכסים שלך — משרד עורכי דין אברהם בלום">
     <meta name="twitter:description" content="משרד עורכי דין אברהם בלום מתמחה במקרקעין, התחדשות עירונית, צוואות וייפוי כוח מתמשך. ליווי משפטי מקצועי, אישי ואמין — כי הנכס והעתיד שלך שווים את הטוב ביותר.">
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"LocalBusiness","@id":"https://blumofficelaw.co.il#organization","name":"משרד עורכי דין אברהם בלום","url":"https://blumofficelaw.co.il","description":"Law office of attorney Abraham Bloom, specializing in real estate law, urban renewal, wills and inheritance, and enduring power of attorney. The firm handles a broad range of legal services with a focus on property and personal planning law. The brand should convey professionalism, trustworthiness, and legal expertise, drawing inspiration from leading Israeli and international law firm websites.","address":{"@type":"PostalAddress","streetAddress":"נחום חפצדי 17, ירושלים, גבעת שאול, 9548407, ישראל"},"contactPoint":[{"@type":"ContactPoint","contactType":"customer service","email":"blumofficelaw@gmail.com","telephone":"+972507774342"}]},{"@type":"WebSite","@id":"https://blumofficelaw.co.il#website","url":"https://blumofficelaw.co.il","name":"משרד עורכי דין אברהם בלום","publisher":{"@id":"https://blumofficelaw.co.il#organization"}}]}</script>
     <meta property="og:type" content="website">
   <meta property="og:locale" content="he_IL">
   
@@ -253,6 +259,7 @@
     <!-- Mickidum Accessibility Toolbar -->
     <script src="https://cdn.jsdelivr.net/gh/mickidum/acc_toolbar/acctoolbar/acctoolbar.min.js"></script>
     <link rel="stylesheet" href="/styles.css">
+    <script>window.ZAPPY_WEBSITE_ID = "f671f20b-3a3c-4474-afc4-fe67caf76287"; window.ZAPPY_API_BASE = "https://api.zappy5.com";</script>
 
     <style id="zappy-dropdown-submenu-styles">
       /* ========== DESKTOP DROPDOWN SUBMENU STYLES ========== */
@@ -846,7 +853,7 @@
       <p class="index-hero-label" style="color: rgb(30, 30, 28) !important;">משרד עורכי דין</p>
 
       <!-- Main Headline -->
-      <h1 class="index-hero-h1" >אברהם בלום<br><span class="index-hero-h1-sub">משרד עורכי דין&nbsp;</span></h1>
+      <h1 class="index-hero-h1" style="">אברהם בלום<br><span class="index-hero-h1-sub">משרד עורכי דין&nbsp;</span></h1>
 
       <!-- Subtitle -->
       <h3 class="index-hero-subtitle">מקרקעין, התחדשות עירונית, צוואות וירושות,<br class="index-hero-br-desktop"> ייפוי כוח מתמשך — ליווי משפטי מקצועי ואישי</h3>
@@ -1135,7 +1142,7 @@
 
 </section>
 
-<section data-band-index="4" class="index-cta-section" data-layout-spec="בית-cta" dir="rtl">
+<section data-band-index="4" class="index-cta-section" data-layout-spec="בית-cta" dir="rtl" id="index-cta-section">
   <div class="index-cta-bg-layer" aria-hidden="true">
     <svg data-no-icon-edit="true" aria-hidden="true" class="index-cta-arch-svg" viewBox="0 0 900 420" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
       <ellipse cx="450" cy="480" rx="520" ry="320" stroke="#C6A14A" stroke-width="0.6" stroke-dasharray="4 8" opacity="0.13"></ellipse>
@@ -1163,8 +1170,8 @@
           <svg data-no-icon-edit="true" aria-hidden="true" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="0" width="2" height="12" fill="#C6A14A" opacity="0.7"></rect><rect x="0" y="5" width="12" height="2" fill="#C6A14A" opacity="0.7"></rect></svg>
           <span class="index-cta-ornament-line"></span>
         </div>
-        <a href="/contact" class="index-cta-btn">צרו קשר לייעוץ ראשוני</a>
-        <p class="index-cta-subtext">ייעוץ ראשוני בסודיות מלאה ובאווירה נעימה</p>
+        <p><a href="/contact" class="index-cta-btn" data-element-type="button" data-element-id="btn-1783326954996-bwbhvbc39" data-native-element="true" style="outline: none;">צרו קשר לייעוץ ראשוני ללא התחייבות</a>
+        </p><p class="index-cta-subtext" style="color: rgb(247, 243, 234) !important;">ייעוץ ראשוני בסודיות מלאה&nbsp;</p>
       </div>
     </div>
   </div>
@@ -1178,7 +1185,7 @@
       <!-- Column 1: Company Info -->
       <div class="footer-col footer-brand">
         <a href="/" class="footer-logo-link" aria-label="עמוד הבית של משרד עורכי דין אברהם בלום">
-          <img src="/assets/legal-services-logo.webp" alt="משרד עורכי דין אברהם בלום" class="logo" data-element-type="image" data-element-id="img-1779710818426-636k23utm" data-zappy-footer-image="true" >
+          <img src="/assets/legal-services-logo.webp" alt="משרד עורכי דין אברהם בלום" class="logo" data-element-type="image" data-element-id="img-1779710818426-636k23utm" data-zappy-footer-image="true" style="">
         </a>
         <p class="footer-tagline">ייעוץ משפטי מקצועי, אמין ומנוסה — לאנשים פרטיים, יזמים ותאגידים מובילים.</p>
         <div class="footer-social" aria-label="רשתות חברתיות">
@@ -1201,7 +1208,7 @@
       <!-- Column 3: Contact Info -->
       <div class="footer-col footer-contact-col">
         <h3 class="footer-heading">יצירת קשר</h3>
-        <ul class="footer-contact" aria-label="פרטי יצירת קשר" ><li>
+        <ul class="footer-contact" aria-label="פרטי יצירת קשר" style=""><li>
             <span class="contact-icon"><br></span></li><li>
             <span class="contact-icon"><i class="fas fa-phone" data-element-type="icon" data-element-id="icon-1779710818424-h7qy2up31" data-icon-type="fontawesome" style="cursor: pointer;"></i></span>
             <span class="contact-text"><a href="tel:+972507774342">+972507774342</a></span>
@@ -1250,7 +1257,7 @@
   </div>
 </footer>
   
-  <a href="https://wa.me/[whatsapp_handle]" class="whatsapp-float" aria-label="WhatsApp" style="display:none">
+  <a href="https://wa.me/[whatsapp_handle]" class="whatsapp-float" aria-label="WhatsApp" style="display:none;">
     <i class="fab fa-whatsapp"></i>
   </a>
   

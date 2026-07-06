@@ -7,37 +7,37 @@
 ## Pages
 
 ### בית
-https://mishradorche-dinabrahambloom-w.zappy5.app
+https://blumofficelaw.co.il
 משרד עורכי דין אברהם בלום מתמחה במקרקעין, התחדשות עירונית, צוואות וייפוי כוח מתמשך. ליווי משפטי מקצועי, אישי ואמין — כי הנכס והעתיד שלך שווים את הטוב ביותר.
 
 ### תחומי עיסוק
-https://mishradorche-dinabrahambloom-w.zappy5.app/practice-areas
+https://blumofficelaw.co.il/practice-areas
 מנדל״ן ועסקאות מקרקעין ועד התחדשות עירונית, ירושות וייפוי כוח מתמשך — גלה את מגוון תחומי העיסוק המשפטיים שבהם אנו מובילים עבורך בכל שלב בחיים.
 
 ### אודות
-https://mishradorche-dinabrahambloom-w.zappy5.app/about
+https://blumofficelaw.co.il/about
 עורך הדין אברהם בלום מביא ניסיון עשיר, גישה אישית ומחויבות עמוקה לכל לקוח. גלה מי עומד מאחורי המשרד ולמה אלפי לקוחות בוחרים בנו שוב ושוב לייצוג משפטי מוביל.
 
 ### תובנות
-https://mishradorche-dinabrahambloom-w.zappy5.app/insights
+https://blumofficelaw.co.il/insights
 מאמרים, עדכוני חקיקה וטיפים מעשיים בתחומי מקרקעין, צוואות, התחדשות עירונית וייפוי כוח מתמשך — כי ידע משפטי נכון הוא ההגנה הטובה ביותר שתוכל לתת לעצמך.
 
 ### צור קשר
-https://mishradorche-dinabrahambloom-w.zappy5.app/contact
+https://blumofficelaw.co.il/contact
 צור קשר עוד היום עם משרד עורכי דין אברהם בלום לייעוץ ראשוני בתחומי מקרקעין, ירושות וייפוי כוח מתמשך. אנחנו כאן כדי להקשיב, לייעץ ולפעול — מהר, מקצועי ובשקיפות מלאה.
 
 ## Legal & Policy
 
 ### Privacy Policy
-https://mishradorche-dinabrahambloom-w.zappy5.app/privacy
+https://blumofficelaw.co.il/privacy
 Information about how user data is collected, stored, and protected.
 
 ### Terms & Conditions
-https://mishradorche-dinabrahambloom-w.zappy5.app/terms
+https://blumofficelaw.co.il/terms
 Legal terms describing service usage, rights, and policies.
 
 ### Accessibility Statement
-https://mishradorche-dinabrahambloom-w.zappy5.app/accessibility
+https://blumofficelaw.co.il/accessibility
 Information about WCAG compliance and accessibility features.
 
 ---
@@ -50,8 +50,8 @@ Information about WCAG compliance and accessibility features.
 - Address: נחום חפצדי 17, ירושלים, גבעת שאול, 9548407, ישראל
 
 ### Contact form
-- URL: https://mishradorche-dinabrahambloom-w.zappy5.app/contact
-- Endpoint: https://mishradorche-dinabrahambloom-w.zappy5.app/api/email/contact-form
+- URL: https://blumofficelaw.co.il/contact
+- Endpoint: https://blumofficelaw.co.il/api/email/contact-form
 - Method: POST
 - Content-Type: application/json
 - Fields:
@@ -90,6 +90,6 @@ Legal Services
 
 # Machine-readable feeds
 
-- Sitemap (XML): https://mishradorche-dinabrahambloom-w.zappy5.app/sitemap.xml
-- Robots: https://mishradorche-dinabrahambloom-w.zappy5.app/robots.txt
-- Flattened page text (for LLMs): https://mishradorche-dinabrahambloom-w.zappy5.app/llms-full.txt
+- Sitemap (XML): https://blumofficelaw.co.il/sitemap.xml
+- Robots: https://blumofficelaw.co.il/robots.txt
+- Flattened page text (for LLMs): https://blumofficelaw.co.il/llms-full.txt

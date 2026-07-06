@@ -50,4 +50,4 @@ Allow: /
 User-agent: MistralAI-User
 Allow: /
 
-Sitemap: https://mishradorche-dinabrahambloom-w.zappy5.app/sitemap.xml
+Sitemap: https://blumofficelaw.co.il/sitemap.xml

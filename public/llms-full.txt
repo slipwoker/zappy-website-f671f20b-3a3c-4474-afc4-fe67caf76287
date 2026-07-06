@@ -2,13 +2,13 @@
 
 Law office of attorney Abraham Bloom, specializing in real estate law, urban renewal, wills and inheritance, and enduring power of attorney. The firm handles a broad range of legal services with a focus on property and personal planning law. The brand should convey professionalism, trustworthiness, and legal expertise, drawing inspiration from leading Israeli and international law firm websites.
 
-Source: https://mishradorche-dinabrahambloom-w.zappy5.app
+Source: https://blumofficelaw.co.il
 
 ---
 
 ## הגנה משפטית חכמה על הנכסים שלך — משרד עורכי דין אברהם בלום
 
-URL: https://mishradorche-dinabrahambloom-w.zappy5.app
+URL: https://blumofficelaw.co.il
 Description: משרד עורכי דין אברהם בלום מתמחה במקרקעין, התחדשות עירונית, צוואות וייפוי כוח מתמשך. ליווי משפטי מקצועי, אישי ואמין — כי הנכס והעתיד שלך שווים את הטוב ביותר.
 
 הגנה משפטית חכמה על הנכסים שלך — משרד עורכי דין אברהם בלום
@@ -439,9 +439,10 @@ Description: משרד עורכי דין אברהם בלום מתמחה במקר�
 
 
 
-צרו קשר לייעוץ ראשוני
 
-ייעוץ ראשוני בסודיות מלאה ובאווירה נעימה
+צרו קשר לייעוץ ראשוני ללא התחייבות
+
+ייעוץ ראשוני בסודיות מלאה
 
 
 
@@ -548,7 +549,7 @@ Description: משרד עורכי דין אברהם בלום מתמחה במקר�
 
 ## כל תחום משפטי — מומחיות אחת גדולה — משרד עורכי דין אברהם בלום
 
-URL: https://mishradorche-dinabrahambloom-w.zappy5.app/practice-areas
+URL: https://blumofficelaw.co.il/practice-areas
 Description: מנדל״ן ועסקאות מקרקעין ועד התחדשות עירונית, ירושות וייפוי כוח מתמשך — גלה את מגוון תחומי העיסוק המשפטיים שבהם אנו מובילים עבורך בכל שלב בחיים.
 
 כל תחום משפטי — מומחיות אחת גדולה — משרד עורכי דין אברהם בלום
@@ -1048,7 +1049,7 @@ Description: מנדל״ן ועסקאות מקרקעין ועד התחדשות ע
 
 ## הכר את עורך הדין שיילחם עבורך — משרד עורכי דין אברהם בלום
 
-URL: https://mishradorche-dinabrahambloom-w.zappy5.app/about
+URL: https://blumofficelaw.co.il/about
 Description: עורך הדין אברהם בלום מביא ניסיון עשיר, גישה אישית ומחויבות עמוקה לכל לקוח. גלה מי עומד מאחורי המשרד ולמה אלפי לקוחות בוחרים בנו שוב ושוב לייצוג משפטי מוביל.
 
 הכר את עורך הדין שיילחם עבורך — משרד עורכי דין אברהם בלום
@@ -1531,7 +1532,7 @@ Description: עורך הדין אברהם בלום מביא ניסיון עשי�
 
 ## דעו יותר, החליטו טוב יותר — תובנות משפטיות — משרד עורכי דין אברהם בלום
 
-URL: https://mishradorche-dinabrahambloom-w.zappy5.app/insights
+URL: https://blumofficelaw.co.il/insights
 Description: מאמרים, עדכוני חקיקה וטיפים מעשיים בתחומי מקרקעין, צוואות, התחדשות עירונית וייפוי כוח מתמשך — כי ידע משפטי נכון הוא ההגנה הטובה ביותר שתוכל לתת לעצמך.
 
 דעו יותר, החליטו טוב יותר — תובנות משפטיות — משרד עורכי דין אברהם בלום
@@ -1957,7 +1958,7 @@ Description: מאמרים, עדכוני חקיקה וטיפים מעשיים ב�
 
 ## צעד אחד קטן לשקט נפשי גדול — משרד עורכי דין אברהם בלום
 
-URL: https://mishradorche-dinabrahambloom-w.zappy5.app/contact
+URL: https://blumofficelaw.co.il/contact
 Description: צור קשר עוד היום עם משרד עורכי דין אברהם בלום לייעוץ ראשוני בתחומי מקרקעין, ירושות וייפוי כוח מתמשך. אנחנו כאן כדי להקשיב, לייעץ ולפעול — מהר, מקצועי ובשקיפות מלאה.
 
 צעד אחד קטן לשקט נפשי גדול — משרד עורכי דין אברהם בלום
@@ -2344,7 +2345,7 @@ Description: צור קשר עוד היום עם משרד עורכי דין אב�
 
 ## מדיניות פרטיות
 
-URL: https://mishradorche-dinabrahambloom-w.zappy5.app/privacy
+URL: https://blumofficelaw.co.il/privacy
 Description: מדיניות הפרטיות שלנו - כיצד אנו אוספים, משתמשים ומגנים על המידע שלכם
 
 מדיניות פרטיות
@@ -2617,7 +2618,7 @@ Description: מדיניות הפרטיות שלנו - כיצד אנו אוספי
 
 ## הצהרת נגישות
 
-URL: https://mishradorche-dinabrahambloom-w.zappy5.app/accessibility
+URL: https://blumofficelaw.co.il/accessibility
 Description: הצהרת הנגישות שלנו - מחויבותנו לנגישות דיגיטלית
 
 הצהרת נגישות
@@ -2899,7 +2900,7 @@ Description: הצהרת הנגישות שלנו - מחויבותנו לנגיש�
 
 ## תנאי שימוש
 
-URL: https://mishradorche-dinabrahambloom-w.zappy5.app/terms
+URL: https://blumofficelaw.co.il/terms
 Description: תנאי השימוש באתר - הזכויות והחובות של המשתמשים
 
 תנאי שימוש
