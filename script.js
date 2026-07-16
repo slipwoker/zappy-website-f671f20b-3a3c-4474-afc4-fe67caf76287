@@ -1478,6 +1478,32 @@ window.onload = function() {
     }
 })();
 
+/* ZAPPY_CUSTOM_JS_START:b5ef89307a52 */
+(function () {
+  function __zappyCustomInit() {
+    try {
+(function() {
+  // If Nagich is already loaded, don't add again
+  if (window.nagichLoad) return;
+  
+  var s = document.createElement('script');
+  s.src = 'https://nagich.co.il/api/v1/script.js';
+  s.async = true;
+  s.setAttribute('data-site-key', 'nagich-default');
+  document.head.appendChild(s);
+})();
+    } catch (e) {
+      if (typeof console !== 'undefined' && console.warn) { console.warn('[zappy-custom-js]', e); }
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', __zappyCustomInit);
+  } else {
+    __zappyCustomInit();
+  }
+})();
+/* ZAPPY_CUSTOM_JS_END:b5ef89307a52 */
+
 
 /* ZAPPY_PUBLISHED_LIGHTBOX_RUNTIME */
 (function(){
