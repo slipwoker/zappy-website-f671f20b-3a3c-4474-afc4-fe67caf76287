@@ -1504,6 +1504,32 @@ window.onload = function() {
 })();
 /* ZAPPY_CUSTOM_JS_END:b5ef89307a52 */
 
+/* ZAPPY_CUSTOM_JS_START:0697440448dc */
+(function () {
+  function __zappyCustomInit() {
+    try {
+(function() {
+  // Only run if UserWay is not already loaded
+  if (document.querySelector('.uwy, [data-uw]')) return;
+  
+  var script = document.createElement('script');
+  script.src = 'https://cdn.userway.org/widget.js';
+  script.defer = true;
+  script.setAttribute('data-account', 'zappy-accessibility');
+  document.body.appendChild(script);
+})();
+    } catch (e) {
+      if (typeof console !== 'undefined' && console.warn) { console.warn('[zappy-custom-js]', e); }
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', __zappyCustomInit);
+  } else {
+    __zappyCustomInit();
+  }
+})();
+/* ZAPPY_CUSTOM_JS_END:0697440448dc */
+
 
 /* ZAPPY_PUBLISHED_LIGHTBOX_RUNTIME */
 (function(){
