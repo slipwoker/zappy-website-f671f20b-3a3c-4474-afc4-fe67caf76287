@@ -770,10 +770,10 @@ body:has(.zappy-announcement-bar) .navbar:not(.zappy-catalog-menu):not(.mobile-s
 <a class="skip-link" href="#main">דלג לתוכן הראשי</a>
   <nav class="navbar" dir="rtl">
   <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
-    <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <svg style="display:block !important" class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
       <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
     </svg>
-    <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display: none;">
+    <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display:none !important">
       <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
     </svg>
   </button>
@@ -1241,7 +1241,7 @@ body:has(.zappy-announcement-bar) .navbar:not(.zappy-catalog-menu):not(.mobile-s
   <div class="practice-areas-intro-container">
     <div class="practice-areas-intro-eyebrow">תחומי עיסוק</div>
     <h1 class="practice-areas-intro-heading">ייעוץ משפטי מקצועי בתחומי הנדל"ן, ההתחדשות העירונית והתכנון האישי</h1>
-    <p class="practice-areas-intro-body" style="">משרד עורכי דין אברהם בלום מתמחה במתן שירותים משפטיים ברמה הגבוהה ביותר ללקוחות פרטיים, עסקים, משפחות, ויזמים. תחומי הפעילות של המשרד כוללים דיני מקרקעין ועסקאות נדל"ן, התחדשות עירונית, ניסוח וביצוע צוואות, ניהול ירושות, וייפוי כוח מתמשך — כל אלה מתוך גישה אישית, מדוקדקת ואמינה.</p>
+    <p class="practice-areas-intro-body">משרד עורכי דין אברהם בלום מתמחה במתן שירותים משפטיים ברמה הגבוהה ביותר ללקוחות פרטיים, עסקים, משפחות, ויזמים. תחומי הפעילות של המשרד כוללים דיני מקרקעין ועסקאות נדל"ן, התחדשות עירונית, ניסוח וביצוע צוואות, ניהול ירושות, וייפוי כוח מתמשך — כל אלה מתוך גישה אישית, מדוקדקת ואמינה.</p>
     <div class="practice-areas-intro-divider" aria-hidden="true">
       <span class="practice-areas-intro-divider-line"></span>
       <span class="practice-areas-intro-divider-diamond"></span>
@@ -1511,12 +1511,10 @@ body:has(.zappy-announcement-bar) .navbar:not(.zappy-catalog-menu):not(.mobile-s
       <!-- Column 1: Company Info -->
       <div class="footer-col footer-brand">
         <a href="/" class="footer-logo-link" aria-label="עמוד הבית של משרד עורכי דין אברהם בלום">
-          <img src="/assets/legal-services-logo.webp" alt="משרד עורכי דין אברהם בלום" class="logo" data-element-type="image" data-element-id="img-1779710818426-636k23utm" data-zappy-footer-image="true" style="" decoding="async" width="35" height="35">
+          <img src="/assets/legal-services-logo.webp" alt="משרד עורכי דין אברהם בלום" class="logo" data-element-type="image" data-element-id="img-1779710818426-636k23utm" data-zappy-footer-image="true" decoding="async" width="35" height="35">
         </a>
-        <p class="footer-tagline">ייעוץ משפטי מקצועי, אמין ומנוסה — לאנשים פרטיים, יזמים ותאגידים מובילים.</p>
-        <div class="footer-social" aria-label="רשתות חברתיות">
-          <!-- All social media platforms disabled -->
-        </div>
+        <p class="footer-tagline">ייעוץ משפטי מקצועי, אמין ומנוסה — לאנשים פרטיים, עסקיים, יזמים ותאגידים מובילים.</p>
+        <div class="footer-social" aria-label="רשתות חברתיות"><a href="https://wa.me/972507774342" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a></div>
       </div>
 
       <!-- Column 2: Quick Links -->
@@ -1534,29 +1532,22 @@ body:has(.zappy-announcement-bar) .navbar:not(.zappy-catalog-menu):not(.mobile-s
       <!-- Column 3: Contact Info -->
       <div class="footer-col footer-contact-col">
         <h3 class="footer-heading">יצירת קשר</h3>
-        <ul class="footer-contact" aria-label="פרטי יצירת קשר" style=""><li>
+        <ul class="footer-contact" aria-label="פרטי יצירת קשר"><li>
             <span class="contact-icon"><br></span></li><li>
             <span class="contact-icon"><i class="fas fa-phone" data-element-type="icon" data-element-id="icon-1779710818424-h7qy2up31" data-icon-type="fontawesome" style="cursor: pointer;"></i></span>
             <span class="contact-text"><a href="tel:+972507774342">+972507774342</a></span>
-          </li><li><a href="/"><span class="contact-icon"><i class="fas fa-map-marker-alt" style="cursor: pointer;"></i></span>
-            <span class="contact-text">נחום חפצדי 17, ירושלים,גבעת שאול, 9548407, ישראל</span></a></li></ul>
+          </li><li><a href="https://www.google.com/maps/search/?api=1&amp;query=%D7%A0%D7%97%D7%95%D7%9D%20%D7%97%D7%A4%D7%A6%D7%93%D7%99%2017%2C%20%D7%99%D7%A8%D7%95%D7%A9%D7%9C%D7%99%D7%9D%2C%20%D7%92%D7%91%D7%A2%D7%AA%20%D7%A9%D7%90%D7%95%D7%9C%2C%209548407%2C%20%D7%99%D7%A9%D7%A8%D7%90%D7%9C" target="_blank" rel="noopener noreferrer"><span class="contact-icon"><i class="fas fa-map-marker-alt" style="cursor: pointer;"></i></span>
+            <span class="contact-text">נחום חפצדי 17, ירושלים,גבעת שאול, 9548407, ישראל</span></a></li><li><span class="contact-icon"><i class="fas fa-envelope" aria-hidden="true"></i></span><span class="contact-text"><a href="mailto:blumofficelaw@gmail.com">blumofficelaw@gmail.com</a></span></li></ul>
       </div>
 
       <!-- Column 4: Business Hours -->
       <div class="footer-col footer-hours-col">
-        <h3 class="footer-heading" style="">שעות פעילות</h3>
-        <ul class="footer-hours" aria-label="שעות פעילות המשרד">
-          <li><a href="/" style=""><span class="hours-day">יום ראשון&nbsp;</span><span class="hours-time">09:00 - 17:00</span></a></li>
-          <li><a href="/" style=""><span class="hours-day">יום שני</span>&nbsp;<span class="hours-time">09:00 - 17:00</span></a></li>
-          <li><a href="/" style=""><span class="hours-day">יום שלישי&nbsp;</span><span class="hours-time">09:00 - 17:00</span></a></li>
-          <li><a href="/" style=""><span class="hours-day">יום רביעי&nbsp;</span><span class="hours-time">09:00 - 17:00</span></a></li>
-          <li><a href="/" style=""><span class="hours-day">יום חמישי <b>09:00 - 17:00&nbsp;</b></span></a></li>
-          <li><a href="/" style=""><span class="hours-day">יום שישי&nbsp;</span><span class="hours-time hours-closed">סגור</span></a></li>
-          <li><a href="/" style=""><span class="hours-day">יום שבת&nbsp;</span><span class="hours-time hours-closed">סגור</span></a></li>
-        </ul>
+        <h3 class="footer-heading">שעות פעילות</h3>
+        <ul class="footer-hours" aria-label="שעות פעילות המשרד"><li><a href="/"><span class="hours-day">ימים א’–ה’</span> <span class="hours-time">09:00–17:00</span></a></li>
+<li><a href="/"><span class="hours-day">ימים ו’–שבת</span> <span class="hours-time">סגור</span></a></li></ul>
         <div class="footer-badge" aria-label="זמינות לייעוץ">
           <i class="fas fa-shield-alt" data-element-type="icon" data-element-id="icon-1779710818424-bwoafhed4" data-icon-type="fontawesome"></i>
-          <span>ייעוץ ראשוני ללא עלות</span>
+          <span>ייעוץ ראשוני ללא התחייבות</span>
         </div>
       </div>
 
@@ -1583,7 +1574,7 @@ body:has(.zappy-announcement-bar) .navbar:not(.zappy-catalog-menu):not(.mobile-s
   </div>
 </footer>
   
-  <a href="https://wa.me/[whatsapp_handle]" class="whatsapp-float" aria-label="WhatsApp" style="display:none;">
+  <a href="https://wa.me/972507774342" class="whatsapp-float" aria-label="WhatsApp" style="display:none">
     <i class="fab fa-whatsapp"></i>
   </a>
   
