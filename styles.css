@@ -8624,6 +8624,14 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
 ._access-icon {
   display: flex !important;
 }
+
+body #mic-access-tool-general-button {
+  top: auto !important;
+  bottom: 12px !important;
+  left: 16px !important;
+  position: fixed !important;
+  z-index: 99999 !important;
+}
 /* mobile-submenu-overflow-fix */
 @media (max-width: 768px) {
   .navbar .sub-menu.mobile-expanded,
