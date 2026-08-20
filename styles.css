@@ -8707,6 +8707,291 @@ body:has(.zappy-announcement-bar) .navbar:not(.zappy-catalog-menu):not(.mobile-s
 }
 
 
+/* ZAPPY_SHARE_BAR_LAYOUT_ENSURE_V3
+   Blog / article share bars: row layout, reading column, orange secondary chips. */
+
+/* Share bars must stay a horizontal chip row. AI cosmetic CSS and leaked
+   mobile rules historically set flex-direction:column globally and left
+   <br> clusters between the label and icons. */
+.social-share-bar,
+[class*="__share-bar"] {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+.social-share-bar > br,
+[class*="__share-bar"] > br {
+  display: none !important;
+}
+
+/* Constrain share / back / hero / title to the same column as body copy
+   (AI pages often only set max-width on __body). */
+[class*="blog-article-section"] > [class*="__share-bar"],
+[class*="blog-article-section"] > .social-share-bar,
+[class*="blog-article-section"] > [class*="__back-container"],
+[class*="blog-article-section"] > [class*="__hero-figure"],
+[class*="blog-article-section"] > [class*="__article-header"],
+[class*="blog-article-section"] > header:not(.site-header):not(.sim-header),
+[class*="blog-article-section"] [class*="__container"] > [class*="__share-bar"],
+[class*="blog-article-section"] [class*="__container"] > .social-share-bar,
+[class*="blog-article-section"] [class*="__container"] > [class*="__back-container"],
+[class*="blog-article-section"] [class*="__container"] > [class*="__hero-figure"],
+[class*="blog-article-section"] [class*="__container"] > [class*="__article-header"] {
+  max-width: 800px !important;
+  width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box !important;
+}
+[class*="blog-article-section"] [class*="__hero-figure"] img,
+[class*="blog-article-section"] [class*="__hero-img"] {
+  max-width: 100% !important;
+}
+
+/* Unify blog share chips to orange secondary outline (jewish-life canonical).
+   Overrides brand-colored inline styles, btn-primary fills, and display:none
+   on LinkedIn/X that made article share bars look inconsistent. */
+[class*="blog-article-section"] .social-share-bar,
+[class*="blog-article-section"] [class*="__share-bar"] {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 14px !important;
+}
+[class*="blog-article-section"] .social-share-bar a,
+[class*="blog-article-section"] .social-share-bar button,
+[class*="blog-article-section"] [class*="__share-bar"] a,
+[class*="blog-article-section"] [class*="__share-bar"] button,
+[class*="blog-article-section"] .share-copy,
+[class*="blog-article-section"] .share-linkedin,
+[class*="blog-article-section"] .share-twitter,
+[class*="blog-article-section"] .share-facebook,
+[class*="blog-article-section"] .share-whatsapp,
+[class*="blog-article-section"] [class*="__share-btn"],
+[class*="blog-article-section"] [class*="__share-icon"],
+[class*="blog-article-section"] .share-btn,
+[class*="blog-article-section"] .share-icon {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
+  min-height: 40px !important;
+  border-radius: 50% !important;
+  background: transparent !important;
+  background-image: none !important;
+  border: 1.5px solid var(--secondary, #ff8a3d) !important;
+  color: var(--secondary, #ff8a3d) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  text-decoration: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+  outline: none !important;
+}
+[class*="blog-article-section"] .social-share-bar a svg,
+[class*="blog-article-section"] .social-share-bar button svg,
+[class*="blog-article-section"] [class*="__share-bar"] a svg,
+[class*="blog-article-section"] [class*="__share-bar"] button svg {
+  width: 18px !important;
+  height: 18px !important;
+  max-width: 18px !important;
+  max-height: 18px !important;
+  color: inherit !important;
+  fill: currentColor;
+  stroke: currentColor;
+}
+[class*="blog-article-section"] .social-share-bar__label,
+[class*="blog-article-section"] [class*="__share-label"],
+[class*="blog-article-section"] .share-label {
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  color: var(--text-dark, #1a1a1a) !important;
+  white-space: nowrap !important;
+}
+
+
+/* ZAPPY_MOBILE_MENU_FULL_BLEED_V1 */
+/* Upgrade legacy half-width (50%/300px) hamburger drawer → full-bleed overlay.
+   High-specificity selectors beat baked RTL "left:auto; right:0" pins
+   (html[lang=he] .nav-menu) and the generator's non-!important width:50%. */
+@media (max-width: 768px) {
+  html body .navbar .nav-menu,
+  html body nav.navbar .nav-menu,
+  html body .navbar #navMenu,
+  html body #navMenu,
+  html body .navbar .nav-menu.active,
+  html body nav.navbar .nav-menu.active,
+  html body .navbar #navMenu.active,
+  html body #navMenu.active,
+  html body .navbar .nav-menu.open,
+  html body #navMenu.open,
+  html[dir="rtl"] body .navbar .nav-menu,
+  html[dir="rtl"] body .navbar #navMenu,
+  html[dir="rtl"] body .navbar .nav-menu.active,
+  html[dir="rtl"] body .navbar #navMenu.active,
+  html[lang="he"] body .navbar .nav-menu,
+  html[lang="he"] body .navbar #navMenu,
+  html[lang="he"] body .navbar .nav-menu.active,
+  html[lang="he"] body .navbar #navMenu.active,
+  html[lang="ar"] body .navbar .nav-menu,
+  html[lang="ar"] body .navbar #navMenu,
+  html[lang="ar"] body .navbar .nav-menu.active,
+  html[lang="ar"] body .navbar #navMenu.active,
+  [dir="rtl"] .navbar .nav-menu,
+  [dir="rtl"] .navbar #navMenu,
+  [dir="rtl"] .navbar .nav-menu.active,
+  [dir="rtl"] .navbar #navMenu.active {
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+    box-sizing: border-box !important;
+    height: calc(100vh - 70px) !important;
+    height: calc(100dvh - var(--zappy-mobile-menu-top, var(--total-header-height, var(--zappy-navbar-bottom, 70px)))) !important;
+    max-height: calc(100dvh - var(--zappy-mobile-menu-top, var(--total-header-height, var(--zappy-navbar-bottom, 70px)))) !important;
+  }
+  html body .navbar .nav-menu > li > a,
+  html body nav.navbar .nav-menu > li > a,
+  html body .navbar #navMenu > li > a,
+  html body #navMenu > li > a {
+    padding: 16px 24px !important;
+    font-weight: 600 !important;
+    font-size: 1.15rem !important;
+    box-sizing: border-box !important;
+  }
+}
+/* END ZAPPY_MOBILE_MENU_FULL_BLEED */
+
+
+/* ZAPPY_CLOSED_MOBILE_NAV_HIDE_V1 */
+@media (max-width: 768px) {
+  .navbar .nav-menu:not(.active):not(.open),
+  nav.navbar .nav-menu:not(.active):not(.open),
+  #navMenu:not(.active):not(.open) {
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+  .navbar .nav-menu:not(.active):not(.open) *,
+  nav.navbar .nav-menu:not(.active):not(.open) *,
+  #navMenu:not(.active):not(.open) * {
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+  .navbar .nav-menu:not(.active):not(.open) .sub-menu,
+  nav.navbar .nav-menu:not(.active):not(.open) .sub-menu,
+  #navMenu:not(.active):not(.open) .sub-menu {
+    display: none !important;
+  }
+}
+
+
+/* ZAPPY_MOBILE_NAV_ACCORDION_V1 */
+@media (max-width: 768px) {
+  #navMenu.active, #navMenu.open, .nav-menu.active, .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+  }
+  #navMenu.active > li, #navMenu.open > li, .nav-menu.active > li, .nav-menu.open > li {
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+    inset: auto !important;
+    transform: none !important;
+  }
+  #navMenu .sub-menu, .nav-menu .sub-menu, .navbar .sub-menu,
+  .zappy-products-dropdown > .sub-menu,
+  .nav-menu .zappy-products-dropdown > .sub-menu,
+  .nav-menu.active .zappy-products-dropdown > .sub-menu,
+  .nav-menu.active .zappy-products-dropdown .sub-menu,
+  #navMenu li:hover > .sub-menu, .nav-menu li:hover > .sub-menu, .navbar li:hover > .sub-menu,
+  #navMenu li:focus-within > .sub-menu, .nav-menu li:focus-within > .sub-menu {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    pointer-events: none !important;
+    position: static !important;
+    transform: none !important;
+  }
+  #navMenu .sub-menu.mobile-expanded,
+  .nav-menu .sub-menu.mobile-expanded,
+  .navbar .sub-menu.mobile-expanded,
+  .zappy-products-dropdown > .sub-menu.mobile-expanded,
+  .nav-menu.active .zappy-products-dropdown > .sub-menu.mobile-expanded,
+  .nav-menu.active .zappy-products-dropdown .sub-menu.mobile-expanded {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    pointer-events: auto !important;
+    position: static !important;
+    transform: none !important;
+    width: 100% !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    float: none !important;
+  }
+}
+
+
+/* ZAPPY_MOBILE_MENU_GROUP_TITLE_V1 */
+/* Menu-group titles: match open-drawer link padding + beat scrolled frosted-text. */
+@media (max-width: 768px) {
+  html body .navbar .nav-menu.active > li > .menu-group-title,
+  html body nav.navbar .nav-menu.active > li > .menu-group-title,
+  html body .navbar #navMenu.active > li > .menu-group-title,
+  html body #navMenu.active > li > .menu-group-title,
+  html body .navbar .nav-menu.open > li > .menu-group-title,
+  html body #navMenu.open > li > .menu-group-title,
+  html body .navbar.scrolled .nav-menu.active > li > .menu-group-title,
+  html body .navbar.scrolled #navMenu.active > li > .menu-group-title,
+  html body .navbar.scrolled .nav-menu.open > li > .menu-group-title,
+  html body .navbar.scrolled #navMenu.open > li > .menu-group-title,
+  html body .navbar.scrolled .nav-menu.active > li.menu-group-item > .menu-group-title,
+  html body .navbar.scrolled #navMenu.active > li.menu-group-item > .menu-group-title {
+    display: flex !important;
+    align-items: center !important;
+    width: 100% !important;
+    max-width: none !important;
+    box-sizing: border-box !important;
+    padding: 12px 16px !important;
+    min-height: 44px !important;
+    line-height: 1.4 !important;
+    font-weight: 600 !important;
+    font-size: inherit !important;
+    color: var(--nav-text, var(--text-light, #fff7ed)) !important;
+  }
+  html body .navbar .nav-menu.active > li.menu-group-item,
+  html body .navbar #navMenu.active > li.menu-group-item,
+  html body .navbar .nav-menu.open > li.menu-group-item,
+  html body #navMenu.open > li.menu-group-item {
+    margin: 4px 0 !important;
+  }
+}
+/* END ZAPPY_MOBILE_MENU_GROUP_TITLE */
+
+
 /* zappy-nav-child-indent */
 .zappy-products-dropdown .zappy-nav-child > a,
 .sub-menu .zappy-nav-child > a {
@@ -8751,9 +9036,11 @@ nav .sub-menu.zappy-empty-submenu,
 }
 
 
-/* ========== RTL MOBILE NAVBAR FIX (zappy-rtl-mobile-fix) ========== */
+/* ========== RTL MOBILE NAVBAR FIX (zappy-rtl-mobile-fix-v2) ========== */
 /* High-specificity rules to ensure RTL positioning wins over any [lang="en"] conflicts */
 /* For RTL sites: hamburger on RIGHT, phone on LEFT (mirror of LTR layout) */
+/* Mobile menu panel is FULL-BLEED (left+right:0) — V1's left:auto pin was for
+   the retired half-width drawer and must not return. */
 /* NOTE: Includes both html[dir="rtl"] AND [dir="rtl"] selectors as fallback */
 /* because some pages may be wrapped with <html lang="en"> (missing dir="rtl" on html) */
 /* but still have dir="rtl" on <body> or other ancestor elements */
@@ -8794,7 +9081,7 @@ nav .sub-menu.zappy-empty-submenu,
     right: auto !important;
   }
   
-  /* RTL Mobile Menu - slides from RIGHT */
+  /* RTL Mobile Menu panel — full-bleed (matches current overlay generator) */
   html[dir="rtl"] .navbar .nav-menu,
   html[dir="rtl"] nav .nav-menu,
   html[dir="rtl"] header .nav-menu,
@@ -8807,8 +9094,10 @@ nav .sub-menu.zappy-empty-submenu,
   [dir="rtl"] .nav-menu,
   html[lang="he"] .nav-menu,
   html[lang="ar"] .nav-menu {
-    left: auto !important;
+    left: 0 !important;
     right: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
   }
   
   /* RTL Mobile Menu Links - text align right */
@@ -9033,7 +9322,9 @@ nav .sub-menu.zappy-empty-submenu,
   
   /* AI-generated section grids with common naming patterns */
   /* These often have fixed pixel column widths that don't adapt to mobile */
-  [class*="-grid"]:not([data-zappy-auto-grid]):not(.zappy-preserve-css-grid):not([data-zappy-explicit-columns="true"]) {
+  /* Exclude .zappy-qv-book-cal-grid — the booking date picker must stay 7-col
+     on mobile (Quick View + PDP). Class name matches [class*="-grid"]. */
+  [class*="-grid"]:not([data-zappy-auto-grid]):not(.zappy-preserve-css-grid):not([data-zappy-explicit-columns="true"]):not(.zappy-qv-book-cal-grid) {
     grid-template-columns: 1fr !important;
   }
   
@@ -9620,6 +9911,7 @@ html[dir="ltr"] .service-detail.service-reverse .service-detail-content { order:
 /* ZAPPY_MOBILE_NAV_ICON_ALIGNMENT_FIX */
 /* ZAPPY_MOBILE_NAV_ICON_ALIGNMENT_FIX_V3 */
 /* ZAPPY_MOBILE_NAV_ICON_ALIGNMENT_FIX_V4 */
+/* ZAPPY_MOBILE_NAV_ICON_ALIGNMENT_FIX_V5 */
 /* The mobile hamburger / phone buttons are absolutely positioned. Keep the
    navbar itself as a non-collapsing containing block so auto-margin centering
    stays aligned even when generated mobile CSS moves every nav child out of flow. */
@@ -9627,6 +9919,67 @@ html[dir="ltr"] .service-detail.service-reverse .service-detail-content { order:
   .navbar,
   nav.navbar {
     min-height: 70px !important;
+  }
+
+  /* V5: Desktop .nav-search-box must stay hidden on mobile. AI/customization CSS
+     often force-shows it with higher specificity than the generator's plain
+     .nav-search-box { display:none } (e.g. .navbar .nav-ecommerce-icons.nav-icons-left
+     .nav-search-box { display:flex; background: cream }), which paints an empty
+     cream/white square left of the cart on RTL ecommerce navs. Beat that chain. */
+  html body .navbar .nav-search-box,
+  html body nav.navbar .nav-search-box,
+  html body .navbar .nav-ecommerce-icons .nav-search-box,
+  html body .navbar .nav-ecommerce-icons.nav-icons-left .nav-search-box,
+  html body .navbar .nav-container .nav-ecommerce-icons.nav-icons-left .nav-search-box {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    min-width: 0 !important;
+    max-width: 0 !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    background: transparent !important;
+    pointer-events: none !important;
+  }
+
+  /* V5: Search-toggle SVG is frequently recolored to --nav-text (cream/white) by
+     AI customization at .navbar .nav-container .nav-ecommerce-icons.nav-icons-right
+     .nav-search-toggle svg, while the pill button itself keeps the correct
+     contrasting color from the luminance-aware pill rules. Inherit that color
+     with a selector that out-ranks the nav-text stroke paint so the icon stays
+     legible on light AND dark pills (no hardcoded text-dark). */
+  html body .navbar .nav-container .nav-ecommerce-icons.nav-icons-right .nav-search-toggle svg,
+  html body .navbar .nav-container .nav-ecommerce-icons.nav-icons-right .nav-search-toggle svg *,
+  html body .navbar .nav-ecommerce-icons.nav-icons-right .nav-search-toggle svg,
+  html body .navbar .nav-ecommerce-icons.nav-icons-right .nav-search-toggle svg * {
+    color: inherit !important;
+    stroke: currentColor !important;
+    fill: none !important;
+  }
+
+  /* V5: Keep the three mobile icon couples on one baseline — absolute groups +
+     hamburger all center against the same navbar box. */
+  html body .navbar .nav-ecommerce-icons.nav-icons-left,
+  html body .navbar .nav-ecommerce-icons.nav-icons-right,
+  html body .navbar .nav-icons-left,
+  html body .navbar .nav-icons-right {
+    top: 50% !important;
+    bottom: auto !important;
+    transform: translateY(-50%) !important;
+    align-items: center !important;
+  }
+  html body .navbar .nav-ecommerce-icons.nav-icons-right .nav-search-toggle,
+  html body .navbar .nav-search-toggle {
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border-radius: 9999px !important;
+    align-self: center !important;
   }
 
   /* E-commerce mobile navbar icon-group alignment.
