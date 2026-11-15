@@ -230,6 +230,9 @@
   var ECOM_MODE = "";
   var IS_CATALOG = false;
   var IS_FULL = false;
+  var DIRECT_GA = false;
+  var DIRECT_META = false;
+  var GA_SEND_TO = "";
 
   var ECOM_ALIAS = {
     begin_checkout: 'checkout_started',
@@ -399,10 +402,14 @@
     return 'zappy_purchase_fired_' + String(orderId || '');
   }
 
+  function purchaseMetaDedupKey(orderId) {
+    return 'zappy_purchase_meta_fired_' + String(orderId || '');
+  }
+
   function alreadyFiredPurchase(orderId) {
     if (!orderId) return false;
     try {
-      return sessionStorage.getItem(purchaseDedupKey(orderId)) === '1';
+      return window.sessionStorage.getItem(purchaseDedupKey(orderId)) === '1';
     } catch (e) {
       return false;
     }
@@ -410,7 +417,78 @@
 
   function markPurchaseFired(orderId) {
     if (!orderId) return;
-    try { sessionStorage.setItem(purchaseDedupKey(orderId), '1'); } catch (e) {}
+    try { window.sessionStorage.setItem(purchaseDedupKey(orderId), '1'); } catch (e) {}
+  }
+
+  function alreadyFiredPurchaseMeta(orderId) {
+    if (!orderId) return false;
+    try {
+      return window.sessionStorage.getItem(purchaseMetaDedupKey(orderId)) === '1';
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function markPurchaseMetaFired(orderId) {
+    if (!orderId) return;
+    try { window.sessionStorage.setItem(purchaseMetaDedupKey(orderId), '1'); } catch (e) {}
+  }
+
+  function getPendingMetaEvents() {
+    try {
+      if (!Array.isArray(window.__zappyPendingMetaEvents)) {
+        window.__zappyPendingMetaEvents = [];
+      }
+      return window.__zappyPendingMetaEvents;
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function enqueueMetaEvent(eventName, params, orderId) {
+    var q = getPendingMetaEvents();
+    if (orderId) {
+      for (var i = 0; i < q.length; i++) {
+        if (q[i] && q[i].orderId === orderId && q[i].eventName === eventName) return;
+      }
+    }
+    q.push({ eventName: eventName, params: params || {}, orderId: orderId || null });
+  }
+
+  /**
+   * Live sites replace the eager Meta snippet with a consent-gated lazy
+   * loader. Payment providers bounce the shopper back to /order-success
+   * before CookieConsent hydrates, so confirm-order used to fire Purchase
+   * while window.fbq was still undefined — then sessionStorage blocked a
+   * retry. Queue until fbq exists, then flush.
+   */
+  function flushPendingMetaEvents() {
+    if (typeof window.fbq !== 'function') return;
+    var q = getPendingMetaEvents().slice();
+    try { window.__zappyPendingMetaEvents = []; } catch (e) {}
+    for (var i = 0; i < q.length; i++) {
+      var item = q[i];
+      if (!item || !item.eventName) continue;
+      if (item.orderId && alreadyFiredPurchaseMeta(item.orderId)) continue;
+      try {
+        window.fbq('track', item.eventName, item.params || {});
+        if (item.orderId) markPurchaseMetaFired(item.orderId);
+      } catch (e2) {}
+    }
+  }
+  window.zappyFlushPendingMetaEvents = flushPendingMetaEvents;
+
+  if (DIRECT_META) {
+    var metaFlushAttempts = 0;
+    var metaFlushTimer = setInterval(function() {
+      metaFlushAttempts++;
+      flushPendingMetaEvents();
+      var pendingLen = 0;
+      try { pendingLen = (window.__zappyPendingMetaEvents || []).length; } catch (e) {}
+      if ((pendingLen === 0 && typeof window.fbq === 'function') || metaFlushAttempts > 60) {
+        clearInterval(metaFlushTimer);
+      }
+    }, 500);
   }
 
   /**
@@ -431,15 +509,19 @@
         metadata.pagePath = pagePath();
       }
 
+      var oid = '';
+      var purchaseAlreadySent = false;
+      var purchaseMetaAlreadySent = false;
       if (eventId === 'checkout_complete') {
-        var oid = String(metadata.orderId || metadata.order_id || metadata.transaction_id || '');
-        if (oid && alreadyFiredPurchase(oid)) return;
-        if (oid) markPurchaseFired(oid);
+        oid = String(metadata.orderId || metadata.order_id || metadata.transaction_id || '');
+        purchaseAlreadySent = !!(oid && alreadyFiredPurchase(oid));
+        purchaseMetaAlreadySent = !!(oid && alreadyFiredPurchaseMeta(oid));
+        if (purchaseAlreadySent && purchaseMetaAlreadySent) return;
       }
 
       // First-party (skip when already tracked via zappyTrackEcomAnalytics path
       // that opts out, or when caller already recorded under a different name)
-      if (!opts.skipFirstParty) {
+      if (!opts.skipFirstParty && !purchaseAlreadySent) {
         try {
           if (window.zappyAnalytics && typeof window.zappyAnalytics.track === 'function') {
             window.zappyAnalytics.track(eventId, metadata);
@@ -447,43 +529,79 @@
         } catch (e1) {}
       }
 
-      // GTM / dataLayer — platform-standard ecommerce event names
-      try {
-        window.dataLayer = window.dataLayer || [];
-        if (plat.ecom) {
-          var ga4ForGtm = buildGa4Params(eventId, metadata);
-          var ecommerce = {};
-          if (ga4ForGtm.transaction_id) ecommerce.transaction_id = ga4ForGtm.transaction_id;
-          if (ga4ForGtm.value != null) ecommerce.value = ga4ForGtm.value;
-          if (ga4ForGtm.currency) ecommerce.currency = ga4ForGtm.currency;
-          if (ga4ForGtm.items) ecommerce.items = ga4ForGtm.items;
-          window.dataLayer.push({ event: plat.gtm, ecommerce: ecommerce });
-          // Secondary Zappy-specific trigger for merchants who want it
-          if (eventId === 'checkout_complete' || eventId === 'checkout_started') {
-            window.dataLayer.push({ event: eventId, ecommerce: ecommerce });
+      // GTM / dataLayer — platform-standard ecommerce event names.
+      // Always push. A bare gtag.js snippet ignores plain event objects;
+      // a GTM container is what turns them into GA4/Ads hits.
+      if (!purchaseAlreadySent) {
+        try {
+          window.dataLayer = window.dataLayer || [];
+          if (plat.ecom) {
+            var ga4ForGtm = buildGa4Params(eventId, metadata);
+            var ecommerce = {};
+            if (ga4ForGtm.transaction_id) ecommerce.transaction_id = ga4ForGtm.transaction_id;
+            if (ga4ForGtm.value != null) ecommerce.value = ga4ForGtm.value;
+            if (ga4ForGtm.currency) ecommerce.currency = ga4ForGtm.currency;
+            if (ga4ForGtm.items) ecommerce.items = ga4ForGtm.items;
+            // Clear first so GTM does not merge this hit with the previous ecommerce object.
+            window.dataLayer.push({ ecommerce: null });
+            window.dataLayer.push({ event: plat.gtm, ecommerce: ecommerce });
+            // Secondary Zappy-specific trigger for merchants who want it
+            if (eventId === 'checkout_complete' || eventId === 'checkout_started') {
+              window.dataLayer.push({ ecommerce: null });
+              window.dataLayer.push({ event: eventId, ecommerce: ecommerce });
+            }
+          } else {
+            var dl = { event: plat.gtm };
+            for (var k in metadata) {
+              if (Object.prototype.hasOwnProperty.call(metadata, k)) dl[k] = metadata[k];
+            }
+            window.dataLayer.push(dl);
           }
-        } else {
-          var dl = { event: plat.gtm };
-          for (var k in metadata) {
-            if (Object.prototype.hasOwnProperty.call(metadata, k)) dl[k] = metadata[k];
+        } catch (e2) {}
+
+        // Direct Google Analytics snippet only. GTM also defines window.gtag;
+        // calling it then sends the same event again to every Google tag the
+        // container loaded. send_to keeps a direct GA install off those tags
+        // when the merchant also has GTM.
+        if (DIRECT_GA) {
+          try {
+            if (typeof window.gtag === 'function') {
+              var gaParams = buildGa4Params(eventId, metadata);
+              if (GA_SEND_TO && gaParams && typeof gaParams === 'object') {
+                var gaCopy = {};
+                for (var gk in gaParams) {
+                  if (Object.prototype.hasOwnProperty.call(gaParams, gk)) gaCopy[gk] = gaParams[gk];
+                }
+                gaCopy.send_to = GA_SEND_TO;
+                gaParams = gaCopy;
+              }
+              window.gtag('event', plat.ga4, gaParams);
+            }
+          } catch (e3) {}
+        }
+
+        if (oid) markPurchaseFired(oid);
+      }
+
+      // Meta Pixel — only the Zappy pixel integration. A pixel pasted inside
+      // GTM already initializes fbq; calling it from here would double-count.
+      // Live sites lazy-load fbq after marketing consent. If the stub is not
+      // defined yet, queue and flush when the pixel arrives.
+      if (DIRECT_META) {
+        try {
+          if (purchaseMetaAlreadySent) {
+            // already delivered to Meta
+          } else {
+            var metaParams = buildMetaParams(eventId, metadata);
+            if (typeof window.fbq === 'function') {
+              window.fbq('track', plat.meta, metaParams);
+              if (oid) markPurchaseMetaFired(oid);
+            } else {
+              enqueueMetaEvent(plat.meta, metaParams, eventId === 'checkout_complete' ? oid : null);
+            }
           }
-          window.dataLayer.push(dl);
-        }
-      } catch (e2) {}
-
-      // GA4 gtag
-      try {
-        if (typeof window.gtag === 'function') {
-          window.gtag('event', plat.ga4, buildGa4Params(eventId, metadata));
-        }
-      } catch (e3) {}
-
-      // Meta Pixel (only when fbq is loaded — consent-gated lazy loader)
-      try {
-        if (typeof window.fbq === 'function') {
-          window.fbq('track', plat.meta, buildMetaParams(eventId, metadata));
-        }
-      } catch (e4) {}
+        } catch (e4) {}
+      }
     } catch (err) {}
   };
 
@@ -1251,25 +1369,25 @@ body:has(.zappy-announcement-bar) .navbar:not(.zappy-catalog-menu):not(.mobile-s
 
     <!-- Section Header -->
     <div class="contact-intro-header">
-      <p class="zappy-editable"><span class="contact-intro-eyebrow" style="color: rgb(30, 30, 28) !important;">צרו קשר</span>
+      <p><span class="contact-intro-eyebrow" style="color: rgb(30, 30, 28) !important;">צרו קשר</span>
       </p><div class="contact-intro-gold-rule"></div>
       <h1 class="contact-intro-title">נשמח לעמוד לרשותכם</h1>
       <p class="contact-intro-lead">משרד עורכי דין אברהם בלום מעניק שירות אישי ומקצועי ללקוחות פרטיים ועסקיים. בין אם מדובר בעסקת מקרקעין, תכנון עיזבון, ייפוי כוח מתמשך או כל שאלה משפטית אחרת — אנו כאן להקשיב ולסייע.</p>
     </div>
 
     <!-- Contact Method Cards -->
-    <div class="contact-methods-grid zappy-preserve-css-grid" id="zappy-auto-grid-1783327205077-k1wh10" data-zappy-auto-grid="true" data-original-item-width="379" data-original-gap="32px" style="--zappy-grid-cols: repeat(auto-fit, minmax(min(100%, 379px), 1fr)); grid-template-columns: repeat(auto-fit, minmax(min(100%, 379px), 1fr)); display: grid; align-items: stretch !important;" data-zappy-explicit-columns="true">
+    <div class="contact-methods-grid zappy-preserve-css-grid" id="zappy-auto-grid-1783327205077-k1wh10" data-zappy-auto-grid="true" data-original-item-width="584" data-original-gap="32px" style="--zappy-grid-cols: repeat(auto-fit, minmax(min(100%, 379px), 1fr)); grid-template-columns: repeat(auto-fit, minmax(min(100%, 379px), 1fr)); display: grid; align-items: stretch !important;" data-zappy-explicit-columns="true">
 
       <!-- Phone -->
       <article class="contact-method-card" data-grid-item-index="0">
         <div class="contact-method-icon-wrap">
-          <svg data-element-type="icon" data-icon-type="svg" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <svg data-element-type="icon" data-icon-type="svg" xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-element-id="zappy-temp-icon-1794747142038-fpbzz3yf9" style="width: 29px !important; height: 29px !important; color: rgb(198, 161, 74);" data-size-adjusted="true">
             <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"></path>
           </svg>
         </div>
         <div class="contact-method-content">
-          <h3 class="contact-method-title">טלפון</h3>
-          <p class="contact-method-desc">זמינים בימים ראשון עד חמישי, 09:00–17:00</p>
+          <h3 class="contact-method-title" style="">טלפון:&nbsp;</h3>
+          <p class="contact-method-desc" style="">זמינים בימים ראשון עד חמישי, 09:00–17:00</p>
           
         </div>
       </article>
@@ -1290,7 +1408,7 @@ body:has(.zappy-announcement-bar) .navbar:not(.zappy-catalog-menu):not(.mobile-s
       </article>
 
       <!-- Office Visit -->
-      <article class="contact-method-card" data-grid-item-index="2">
+      <article class="contact-method-card" data-grid-item-index="2" style="">
         <div class="contact-method-icon-wrap">
           <svg data-element-type="icon" data-icon-type="svg" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"></path>
@@ -1433,10 +1551,10 @@ body:has(.zappy-announcement-bar) .navbar:not(.zappy-catalog-menu):not(.mobile-s
     <!-- Image Column (END = LEFT in RTL) -->
     <div class="contact-location-image-col">
       <div class="contact-location-image-frame">
-        <img loading="lazy" fetchpriority="low" data-placeholder="contact-location-image-1" data-context="Interior of a prestigious Israeli law office in Tel Aviv — warm dark wood paneling, a large mahogany desk, leather chairs, bookshelves lined with legal volumes, soft ambient lighting from a floor lamp, framed certificates on the wall, and a city view through large floor-to-ceiling windows. The atmosphere is calm, authoritative, and professional, conveying trust and legal expertise." width="600" height="720" src="/assets/site-contact-location-image-1.webp" alt="משרד עורכי דין אברהם בלום – פנים המשרד בתל אביב" class="contact-location-img" data-element-type="image" data-element-id="img-1783327205032-x3zjaf95l" decoding="async">
+        <img loading="lazy" fetchpriority="low" data-placeholder="contact-location-image-1" data-context="Interior of a prestigious Israeli law office in Tel Aviv — warm dark wood paneling, a large mahogany desk, leather chairs, bookshelves lined with legal volumes, soft ambient lighting from a floor lamp, framed certificates on the wall, and a city view through large floor-to-ceiling windows. The atmosphere is calm, authoritative, and professional, conveying trust and legal expertise." width="600" height="720" src="/assets/site-contact-location-image-1.webp" alt="משרד עורכי דין אברהם בלום – פנים המשרד בתל אביב" class="contact-location-img" data-element-type="image" data-element-id="img-1783327205032-x3zjaf95l" style="" decoding="async">
         <div class="contact-location-image-overlay" aria-hidden="true"></div>
-        <div class="contact-location-badge" aria-hidden="true">
-          <span class="contact-location-badge-number"><span style="font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap;">ניסיון רב עם לקוחות פרטיים ועסקיים</span></span>
+        <div class="contact-location-badge" aria-hidden="true" style="">
+          <span class="contact-location-badge-number" style=""><span style="font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap;">ניסיון רב עם לקוחות פרטיים ועסקיים</span></span>
         </div>
       </div>
     </div>
@@ -1462,9 +1580,9 @@ body:has(.zappy-announcement-bar) .navbar:not(.zappy-catalog-menu):not(.mobile-s
       <!-- Column 1: Company Info -->
       <div class="footer-col footer-brand">
         <a href="/" class="footer-logo-link" aria-label="עמוד הבית של משרד עורכי דין אברהם בלום">
-          <img src="/assets/legal-services-logo.webp" alt="משרד עורכי דין אברהם בלום" class="logo" data-element-type="image" data-element-id="img-1779710818426-636k23utm" data-zappy-footer-image="true" decoding="async" width="35" height="35">
+          <img src="/assets/legal-services-logo.webp" alt="משרד עורכי דין אברהם בלום" class="logo" data-element-type="image" data-element-id="img-1779710818426-636k23utm" data-zappy-footer-image="true" style="" decoding="async" width="35" height="35">
         </a>
-        <p class="footer-tagline">ייעוץ משפטי מקצועי, אמין ומנוסה — לאנשים פרטיים, עסקיים, יזמים ותאגידים מובילים.</p>
+        <p class="footer-tagline" style="">ייעוץ משפטי מקצועי, אמין ומנוסה — לאנשים פרטיים, עסקיים, יזמים ותאגידים מובילים.</p>
         <div class="footer-social" aria-label="רשתות חברתיות"><a href="https://wa.me/972507774342" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a></div>
       </div>
 
@@ -1483,7 +1601,7 @@ body:has(.zappy-announcement-bar) .navbar:not(.zappy-catalog-menu):not(.mobile-s
       <!-- Column 3: Contact Info -->
       <div class="footer-col footer-contact-col">
         <h3 class="footer-heading">יצירת קשר</h3>
-        <ul class="footer-contact" aria-label="פרטי יצירת קשר"><li>
+        <ul class="footer-contact" aria-label="פרטי יצירת קשר" style=""><li>
             <span class="contact-icon"><br></span></li><li>
             <span class="contact-icon"><i class="fas fa-phone" data-element-type="icon" data-element-id="icon-1779710818424-h7qy2up31" data-icon-type="fontawesome" style="cursor: pointer;"></i></span>
             <span class="contact-text"><a href="tel:+972507774342">+972507774342</a></span>
@@ -1493,12 +1611,12 @@ body:has(.zappy-announcement-bar) .navbar:not(.zappy-catalog-menu):not(.mobile-s
 
       <!-- Column 4: Business Hours -->
       <div class="footer-col footer-hours-col">
-        <h3 class="footer-heading">שעות פעילות</h3>
+        <h3 class="footer-heading" style="">שעות פעילות</h3>
         <ul class="footer-hours" aria-label="שעות פעילות המשרד"><li><a href="/"><span class="hours-day">ימים א’–ה’</span> <span class="hours-time">09:00–17:00</span></a></li>
 <li><a href="/"><span class="hours-day">ימים ו’–שבת</span> <span class="hours-time">סגור</span></a></li></ul>
         <div class="footer-badge" aria-label="זמינות לייעוץ">
           <i class="fas fa-shield-alt" data-element-type="icon" data-element-id="icon-1779710818424-bwoafhed4" data-icon-type="fontawesome"></i>
-          <span>ייעוץ ראשוני ללא התחייבות</span>
+          <span style="">ייעוץ ראשוני ללא התחייבות</span>
         </div>
       </div>
 
@@ -1525,7 +1643,7 @@ body:has(.zappy-announcement-bar) .navbar:not(.zappy-catalog-menu):not(.mobile-s
   </div>
 </footer>
   
-  <a href="https://wa.me/972507774342" class="whatsapp-float" aria-label="WhatsApp" style="display:none">
+  <a href="https://wa.me/972507774342" class="whatsapp-float" aria-label="WhatsApp" style="display:none;">
     <i class="fab fa-whatsapp"></i>
   </a>
   
