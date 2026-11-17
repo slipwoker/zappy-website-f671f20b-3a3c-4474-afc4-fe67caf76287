@@ -26,6 +26,9 @@ https://blumofficelaw.co.il/insights
 https://blumofficelaw.co.il/contact
 צור קשר עוד היום עם משרד עורכי דין אברהם בלום לייעוץ ראשוני בתחומי מקרקעין, ירושות וייפוי כוח מתמשך. אנחנו כאן כדי להקשיב, לייעץ ולפעול — מהר, מקצועי ובשקיפות מלאה.
 
+### Page
+https://blumofficelaw.co.il/enduring-power-of-attorney
+
 ## Legal & Policy
 
 ### Privacy Policy
@@ -55,11 +58,11 @@ Information about WCAG compliance and accessibility features.
 - Method: POST
 - Content-Type: application/json
 - Fields:
-  - `name` (text, required)
-  - `email` (email, required)
+  - `name` (text)
+  - `email` (email)
   - `phone` (tel)
-  - `message` (textarea, required)
-  - `privacy_consent` (checkbox, required)
+  - `message` (textarea)
+  - `privacy_consent` (checkbox)
 
 ---
 
